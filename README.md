@@ -40,32 +40,38 @@ Once the prerequisites have been installed and the environment configured, it is
 # fix tensor issue for AARCH64 architecture
 
 - In ./third_party/gpus/crosstool/BUILD.tpl, changed
-	<quote>
+
+	<code>
 	   cc_toolchain_suite(
 			name = "toolchain",
 			toolchains = {
 				...
 			},)
-	</quote>
+	</code>
+	
 to: 
-    <quote>
+
+    <code>
 	   name = "toolchain",
 			toolchains = {
 				...
 				"aarch64": ":cc-compiler-local",
 			},
-	</quote>
+	</code>
 	
 - In ./third_party/aws/BUILD.bazel, changed
-    <quote>
+
+    <code>
 		cc_library(
 			name = "aws",
 			srcs = select({
 				...
 				"//conditions:default": [],
-	</quote>
+	</code>
+	
 to:
-    <quote>
+
+    <code>
 		cc_library(
 			name = "aws",
 			srcs = select({
@@ -73,16 +79,19 @@ to:
 				"//conditions:default": glob([
 					"aws-cpp-sdk-core/source/platform/linux-shared/*.cpp",
 				]),
-	</quote>
+	</code>
 
 - In ./third_party/nccl/build_defs.bzl.tpl, changed
-	<quote>
+
+	<code>
 		maxrregcount = "-maxrregcount=96"
-	</quote>
+	</code>
+	
 to:
-	<quote>
+
+	<code>
 		maxrregcount = "-maxrregcount=80"
-	</quote>
+	</code>
 
 #### buildTensorFlow.sh
 Builds TensorFlow.
