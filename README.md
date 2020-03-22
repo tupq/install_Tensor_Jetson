@@ -108,3 +108,10 @@ This TensorFlow installation procedure was derived from these discussion threads
 </ul>
 
 
+
+#### Remove swap file
+swapoff ~/swapfile
+swapoff -a
+rm ~/swapfile
+
+
