@@ -4,7 +4,7 @@ Inferrenced from JetsonHacks
 
 Install TensorFlow v1.13.1 on NVIDIA Jetson TX2 Development Kit
 
-Jetson TX2 is flashed with JetPack 3.1 which installs:
+Jetson TX2 is flashed with JetPack 4.3 which installs:
 * L4T an Ubuntu 18.04 64-bit variant (aarch64)
 * CUDA 10.0
 * cuDNN 7.6.3
@@ -36,6 +36,53 @@ Sets up the TensorFlow environment variables. This script will ask for the defau
 
 ## Build TensorFlow
 Once the prerequisites have been installed and the environment configured, it is time to build TensorFlow itself.
+
+# fix tensor issue for AARCH64 architecture
+
+- In ./third_party/gpus/crosstool/BUILD.tpl, changed
+	<quote>
+	   cc_toolchain_suite(
+			name = "toolchain",
+			toolchains = {
+				...
+			},)
+	</quote>
+to: 
+    <quote>
+	   name = "toolchain",
+			toolchains = {
+				...
+				"aarch64": ":cc-compiler-local",
+			},
+	</quote>
+	
+- In ./third_party/aws/BUILD.bazel, changed
+    <quote>
+		cc_library(
+			name = "aws",
+			srcs = select({
+				...
+				"//conditions:default": [],
+	</quote>
+to:
+    <quote>
+		cc_library(
+			name = "aws",
+			srcs = select({
+				...
+				"//conditions:default": glob([
+					"aws-cpp-sdk-core/source/platform/linux-shared/*.cpp",
+				]),
+	</quote>
+
+- In ./third_party/nccl/build_defs.bzl.tpl, changed
+	<quote>
+		maxrregcount = "-maxrregcount=96"
+	</quote>
+to:
+	<quote>
+		maxrregcount = "-maxrregcount=80"
+	</quote>
 
 #### buildTensorFlow.sh
 Builds TensorFlow.
