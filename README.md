@@ -40,6 +40,7 @@ Once the prerequisites have been installed and the environment configured, it is
 # fix tensor issue for AARCH64 architecture
 
 - In ./third_party/gpus/crosstool/BUILD.tpl, changed
+
 	<code>
 	   cc_toolchain_suite(
 			name = "toolchain",
