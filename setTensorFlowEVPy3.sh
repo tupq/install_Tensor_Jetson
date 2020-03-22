@@ -22,12 +22,12 @@ TF_NEED_CUDA=1
 default_gcc_host_compiler_path=$(which gcc)
 GCC_HOST_COMPILER_PATH=$default_gcc_host_compiler_path
 # TF CUDA Version 
-TF_CUDA_VERSION=8.0
+TF_CUDA_VERSION=10.0
 # CUDA path
 default_cuda_path=/usr/local/cuda
 CUDA_TOOLKIT_PATH=$default_cuda_path
 # cuDNN
-TF_CUDNN_VERSION=6.0.21
+TF_CUDNN_VERSION=7.6.3
 default_cudnn_path=/usr/lib/aarch64-linux-gnu
 CUDNN_INSTALL_PATH=$default_cudnn_path
 # CUDA compute capability
