@@ -7,10 +7,10 @@
 #
 INSTALL_DIR=$PWD
 cd $HOME
-wget --no-check-certificate https://github.com/bazelbuild/bazel/releases/download/0.19.2/bazel-0.19.2-dist.zip
-unzip bazel-0.19.2-dist.zip -d bazel-0.19.2-dist
-sudo chmod -R ug+rwx $HOME/bazel-0.19.2-dist
+wget --no-check-certificate https://github.com/bazelbuild/bazel/releases/download/0.27.1/bazel-0.27.1-dist.zip
+unzip bazel-0.27.1-dist.zip -d bazel-0.27.1-dist
+sudo chmod -R ug+rwx $HOME/bazel-0.27.1-dist
 # git clone https://github.com/bazelbuild/bazel.git
-cd bazel-0.19.2-dist
-./compile.sh 
+cd bazel-0.27.1-dist
+EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" ./compile.sh 
 sudo cp output/bazel /usr/local/bin
