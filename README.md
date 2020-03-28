@@ -2,7 +2,7 @@
 March 20, 2019
 Inferrenced from JetsonHacks
 
-Install TensorFlow v1.13.1 on NVIDIA Jetson TX2 Development Kit
+Install TensorFlow v2.1.0 on NVIDIA Jetson TX2 Development Kit
 
 Jetson TX2 is flashed with JetPack 4.3 which installs:
 * L4T an Ubuntu 18.04 64-bit variant (aarch64)
@@ -26,39 +26,19 @@ TensorFlow should be built in the following order:
 ## For Python 3.7
 
 #### installPrerequisitesPy3.sh
-Installs Java and other dependencies needed. Also builds Bazel version 0.19.2.
+Installs Java and other dependencies needed. Also builds Bazel version 0.27.1.
 
 #### cloneTensorFlow.sh
-Git clones v1.13.1 from the TensorFlow repository 
+Git clones v2.1.0 from the TensorFlow repository 
 
 #### setTensorFlowEVPy3.sh
-Sets up the TensorFlow environment variables. This script will ask for the default python library path. There are many settings to chose from, the script picks the usual suspects. Uses python 3.5.
+Sets up the TensorFlow environment variables. This script will ask for the default python library path. There are many settings to chose from, the script picks the usual suspects. Uses python 3.x.
 
 ## Build TensorFlow
 Once the prerequisites have been installed and the environment configured, it is time to build TensorFlow itself.
 
 # fix tensor issue for AARCH64 architecture
 
-- In ./third_party/gpus/crosstool/BUILD.tpl, changed
-
-	<code>
-	   cc_toolchain_suite(
-			name = "toolchain",
-			toolchains = {
-				...
-			},)
-	</code>
-	
-to: 
-
-    <code>
-	   name = "toolchain",
-			toolchains = {
-				...
-				"aarch64": ":cc-compiler-local",
-			},
-	</code>
-	
 - In ./third_party/aws/BUILD.bazel, changed
 
     <code>
